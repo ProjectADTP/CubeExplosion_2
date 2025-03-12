@@ -29,7 +29,7 @@ public class CubeSpawner : MonoBehaviour
 
     public void Split(Cube cube)
     {
-        List<Cube> _explodableCube = new List<Cube>();
+        List<Cube> explodableCube = new List<Cube>();
 
         float explosionMultiplier = 1;
 
@@ -44,7 +44,7 @@ public class CubeSpawner : MonoBehaviour
                 Cube newCube = SpawnCube(spawnPosition, newSpawnChance);
                 newCube.transform.localScale = cube.transform.localScale * 0.5f;
 
-                _explodableCube.Add(newCube);
+                explodableCube.Add(newCube);
             }
         }
         else
@@ -52,6 +52,6 @@ public class CubeSpawner : MonoBehaviour
             explosionMultiplier /= cube.SplitChance;
         }
 
-        _exploder.Explode(cube.transform, _explodableCube, explosionMultiplier);
+        _exploder.Explode(cube.transform, explodableCube, explosionMultiplier);
     }
 }

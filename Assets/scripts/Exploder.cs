@@ -17,8 +17,8 @@ public class Exploder : MonoBehaviour
 
     public void Explode(Transform mainCube, List<Cube> cubes, float explosionScale)
     {
-        float _explosionForce = Math.Clamp(ExplosionForce * explosionScale, MinForceValue, MaxForceValue);
-        float _explosionRadius = Math.Clamp(ExplosionRadius * explosionScale, MinRadiusValue, MaxRadiusValue);
+        float explosionForce = Math.Clamp(ExplosionForce * explosionScale, MinForceValue, MaxForceValue);
+        float explosionRadius = Math.Clamp(ExplosionRadius * explosionScale, MinRadiusValue, MaxRadiusValue);
 
         List<Rigidbody> affectedObjects = new();
 
@@ -34,15 +34,14 @@ public class Exploder : MonoBehaviour
                 }
             }
         }
-
         else
         {
-            affectedObjects = GetExplodableObjects(_explosionRadius);
+            affectedObjects = GetExplodableObjects(explosionRadius);
         }
 
         foreach (Rigidbody rigidbody in affectedObjects)
         {
-            rigidbody.AddExplosionForce(_explosionForce, transform.position, _explosionRadius);
+            rigidbody.AddExplosionForce(explosionForce, transform.position, explosionRadius);
         }
     }
 
